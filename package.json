@@ -1,10 +1,30 @@
 {
   "name": "draco3d",
-  "version": "1.5.7",
+  "version": "0.0.1",
   "description": "Draco is a library for compressing and decompressing 3D geometric meshes and point clouds. It is intended to improve the storage and transmission of 3D graphics.",
-  "main": "draco3d.js",
+  "main": "dist/cjs/draco3d/index.js",
+  "types": "dist/cjs/draco3d/index.d.ts",
+  "files": [
+    "dist/*/draco3d/*"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/draco3d/index.d.ts",
+        "default": "./dist/esm/draco3d/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/draco3d/index.d.ts",
+        "default": "./dist/cjs/draco3d/index.js"
+      }
+    }
+  },
   "scripts": {
-    "test": "node draco_nodejs_example.js"
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "prepack": "npm run build",
+    "test": "npm run build:cjs && node dist/cjs/example.js"
   },
   "keywords": [
     "geometry",
@@ -17,5 +37,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/google/draco.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "typescript": "^5.8.3"
   }
 }
