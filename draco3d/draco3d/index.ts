@@ -116,12 +116,27 @@ export interface ExpertEncoder extends EncoderBase {
 }
 
 export interface Decoder {
-    DecodeBufferToMesh(buffer: DecoderBuffer, mesh: Mesh): Status;
-    DecodeBufferToPointCloud(buffer: DecoderBuffer, pointCloud: PointCloud): Status;
+    DecodeArrayToPointCloud(array: Int8Array, size: number, pointCloud: PointCloud): Status;
+    DecodeArrayToMesh(buffer: Int8Array, size: number, mesh: Mesh): Status;
+    GetAttributeId(pointCloud: PointCloud, attributeType: GeometryAttributeType): number;
+    GetAttributeIdByName(pointCloud: PointCloud, name: string): number;
+    GetAttributeIdByMetadataEntry(pointCloud: PointCloud, name: string, value: string): number;
+    GetAttribute(pointCloud: PointCloud, id: number): Attribute;
     GetAttributeByUniqueId(pointCloud: PointCloud, id: number): Attribute;
+    GetMetadata(pointCloud: PointCloud): Metadata;
+    GetAttributeMetadata(pointCloud: PointCloud, attributeId: number): Metadata;
     GetFaceFromMesh(mesh: Mesh, index: number, array: DracoArray): number;
+    GetTriangleStripsFromMesh(mesh: Mesh, array: DracoArray): number;
     GetTrianglesUInt16Array(mesh: Mesh, byteLength: number, ptr: number): void;
     GetTrianglesUInt32Array(mesh: Mesh, byteLength: number, ptr: number): void;
+    GetAttributeFloat(attribute: Attribute, index: number, array: DracoArray): void;
+    GetAttributeFloatForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
+    GetAttributeInt8ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
+    GetAttributeUInt8ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
+    GetAttributeInt16ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
+    GetAttributeUInt16ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
+    GetAttributeInt32ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
+    GetAttributeUInt32ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
     GetAttributeDataArrayForAllPoints: (
         pointCloud: PointCloud,
         attribute: Attribute,
@@ -129,19 +144,6 @@ export interface Decoder {
         byteLength: number,
         ptr: number,
     ) => void;
-    GetAttributeFloatForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
-    GetAttributeInt8ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
-    GetAttributeInt16ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
-    GetAttributeInt32ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
-    GetAttributeUInt8ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
-    GetAttributeUInt16ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
-    GetAttributeUInt32ForAllPoints(pointCloud: PointCloud, attribute: Attribute, array: DracoArray): void;
-    GetEncodedGeometryType(buffer: DecoderBuffer): GeometryType;
-    GetAttributeId(pointCloud: PointCloud, attributeType: number): number;
-    GetAttributeIdByName(pointCloud: PointCloud, name: string): number;
-    GetAttribute(pointCloud: PointCloud, id: number): Attribute;
-    GetMetadata(pointCloud: PointCloud): Metadata;
-    GetAttributeMetadata(pointCloud: PointCloud, attributeId: number): Metadata;
 }
 
 export interface DecoderBuffer {
@@ -174,7 +176,14 @@ export interface Status {
 }
 
 export interface Attribute {
+    size(): number;
+    attribute_type(): number;
+    data_type(): number;
     num_components(): number;
+    normalized(): boolean;
+    byte_stride(): number;
+    byte_offset(): number;
+    unique_id(): number;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
