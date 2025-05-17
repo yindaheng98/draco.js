@@ -1,7 +1,6 @@
 // \home\yindaheng98\cags-draco\example.ts
 import * as fs from 'fs';
-import { Decoder } from './draco3d/decoder';
-import { Encoder } from './draco3d/encoder';
+import { Encoder, Decoder } from './draco3d';
 
 async function main() {
   try {
@@ -20,7 +19,7 @@ async function main() {
 
     // Decode mesh
     const decodedGeometry = await decoder.decode(rawData);
-    
+
     // Check if it's a mesh
     if ('num_faces' in decodedGeometry) {
       console.log(`Decoded geometry: ${decodedGeometry.num_faces()} faces, ${decodedGeometry.num_points()} points`);
