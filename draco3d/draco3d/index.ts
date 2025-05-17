@@ -1,7 +1,16 @@
-type TypedArray = Float32Array | Uint32Array | Uint16Array | Uint8Array | Int32Array | Int16Array | Int8Array;
+/**
+ * @fileoverview Main file for draco3d package.
+ */
 
-export function createDecoderModule(object?: Record<string, unknown>): Promise<DecoderModule>;
-export function createEncoderModule(object?: Record<string, unknown>): Promise<EncoderModule>;
+import encoderModule from './draco_encoder';
+import decoderModule from './draco_decoder';
+
+// Export the main functions with their types
+export const createEncoderModule = encoderModule as (object?: Record<string, unknown>) => Promise<EncoderModule>;
+export const createDecoderModule = decoderModule as (object?: Record<string, unknown>) => Promise<DecoderModule>;
+
+// https://github.com/DefinitelyTyped/DefinitelyTyped/blob/83a2d25d94d40c1adc04ac286f68865c9a22b85b/types/draco3d/index.d.ts
+type TypedArray = Float32Array | Uint32Array | Uint16Array | Uint8Array | Int32Array | Int16Array | Int8Array;
 
 export interface BaseModule {
     Mesh: new() => Mesh;

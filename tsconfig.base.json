@@ -9,14 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "checkJs": false,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
   },
-  "types": [
-    "draco3d/draco3d/index.d.ts"
-  ],
   "include": [
     "draco3d/**/*",
     "example.ts"
