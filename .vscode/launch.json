@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Typescript Debug",
+            "program": "${workspaceFolder}/example.ts",
+            "preLaunchTask": "npm:build:cjs",
+            "outFiles": [
+                "${workspaceFolder}/dist/cjs/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Javascript Debug",
+            "program": "${workspaceFolder}/draco_nodejs_example.js",
+        }
+    ]
+}

@@ -28,7 +28,6 @@
 /CMakeLists.txt.user*
 
 # Visual Studio Code
-/.vscode/
 /.cache/
 
 # Visual Studio work directory
