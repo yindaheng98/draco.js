@@ -83,8 +83,8 @@ export interface DecoderModule extends BaseModule {
 }
 
 interface EncoderBase {
-    SetSpeedOptions(encodeSpeed: number, decodeSpeed: number): void;
     SetEncodingMethod(method: number): void;
+    SetSpeedOptions(encodeSpeed: number, decodeSpeed: number): void;
     SetTrackEncodedProperties(track: boolean): void;
     GetNumberOfEncodedPoints(): number;
     GetNumberOfEncodedFaces(): number;
@@ -100,6 +100,7 @@ export interface Encoder extends EncoderBase {
         range: number,
     ): void;
     EncodeMeshToDracoBuffer(mesh: Mesh, array: DracoInt8Array): number;
+    EncodePointCloudToDracoBuffer(pointCloud: PointCloud, deduplicate_values: boolean, array: DracoInt8Array): number;
 }
 
 export interface ExpertEncoder extends EncoderBase {
@@ -149,6 +150,7 @@ export interface DecoderBuffer {
 
 export interface DracoArray {
     GetValue(index: number): number;
+    size(): number;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -217,55 +219,55 @@ export interface Mesh extends PointCloud {
 export interface PointCloudBuilder {
     AddFloatAttribute(
         pointCloud: PointCloud,
-        attribute: number,
+        attribute: GeometryAttributeType,
         count: number,
         itemSize: number,
         array: TypedArray,
     ): number;
     AddInt8Attribute(
         pointCloud: PointCloud,
-        attribute: number,
+        attribute: GeometryAttributeType,
         count: number,
         itemSize: number,
         array: TypedArray,
     ): number;
     AddUInt8Attribute(
         pointCloud: PointCloud,
-        attribute: number,
+        attribute: GeometryAttributeType,
         count: number,
         itemSize: number,
         array: TypedArray,
     ): number;
     AddInt16Attribute(
         pointCloud: PointCloud,
-        attribute: number,
+        attribute: GeometryAttributeType,
         count: number,
         itemSize: number,
         array: TypedArray,
     ): number;
     AddUInt16Attribute(
         pointCloud: PointCloud,
-        attribute: number,
+        attribute: GeometryAttributeType,
         count: number,
         itemSize: number,
         array: TypedArray,
     ): number;
     AddInt32Attribute(
         pointCloud: PointCloud,
-        attribute: number,
+        attribute: GeometryAttributeType,
         count: number,
         itemSize: number,
         array: TypedArray,
     ): number;
     AddUInt32Attribute(
         pointCloud: PointCloud,
-        attribute: number,
+        attribute: GeometryAttributeType,
         count: number,
         itemSize: number,
         array: TypedArray,
     ): number;
-    SetMetadataForAttribute(pointCloud: PointCloud, attributeId: number, metadata: Metadata): boolean;
     AddMetadata(pointCloud: PointCloud, metadata: Metadata): boolean;
+    SetMetadataForAttribute(pointCloud: PointCloud, attributeId: number, metadata: Metadata): boolean;
     SetNormalizedFlagForAttribute(pointCloud: PointCloud, attributeId: number, normalized: boolean): boolean;
 }
 
