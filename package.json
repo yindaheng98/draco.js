@@ -21,8 +21,8 @@
   },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json && node tools/copy_wasm.js dist/esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json && node tools/copy_wasm.js dist/cjs",
     "prepack": "npm run build",
     "test": "npm run build:cjs && node dist/cjs/example.js"
   },
