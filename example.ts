@@ -18,7 +18,7 @@ async function main() {
     console.log(`Decoding file of size ${rawData.byteLength} ..`);
 
     // Decode mesh
-    const decodedGeometry = await decoder.decode(new Int8Array(rawData));
+    const decodedGeometry = await decoder.decode([].slice.call(rawData));
 
     // Check if it's a mesh
     if ('num_faces' in decodedGeometry) {

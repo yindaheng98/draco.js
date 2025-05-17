@@ -25,6 +25,13 @@ make
 cd ../
 ```
 
+Convert IDL to d.ts:
+
+```sh
+./node_modules/.bin/webidl-dts-gen -i submodules/draco/src/draco/javascript/emscripten/draco_web_encoder.idl -o draco3d/draco3d/draco_encoder.d.ts -ed
+./node_modules/.bin/webidl-dts-gen -i submodules/draco/src/draco/javascript/emscripten/draco_web_decoder.idl -o draco3d/draco3d/draco_decoder.d.ts -ed
+```
+
 Link WASM
 
 ```sh

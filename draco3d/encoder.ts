@@ -1,8 +1,8 @@
-import { createEncoderModule, EncoderModule, Encoder as DracoEncoder, Mesh, DracoInt8Array } from './draco3d';
+import { EncoderModule as M } from './draco3d';
 
 export class Encoder {
-  private module: EncoderModule | null = null;
-  private encoder: DracoEncoder | null = null;
+  private module: typeof M | null = null;
+  private encoder: M.Encoder | null = null;
   private initializationPromise: Promise<void> | null = null;
 
   constructor() {
@@ -10,7 +10,7 @@ export class Encoder {
   }
 
   private async initialize(): Promise<void> {
-    this.module = await createEncoderModule();
+    this.module = await M({});
     this.encoder = new this.module.Encoder();
   }
 
@@ -21,7 +21,7 @@ export class Encoder {
     }
   }
 
-  public async encode(mesh: Mesh): Promise<ArrayBuffer> {
+  public async encode(mesh: M.Mesh): Promise<ArrayBuffer> {
     await this.waitInitialization();
     if (!this.module || !this.encoder) {
       throw new Error('Encoder not initialized');
