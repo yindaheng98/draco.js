@@ -65,7 +65,6 @@ declare module Module {
         num_faces(): number;
         num_attributes(): number;
         num_points(): number;
-        set_num_points(num_points: number): void;
     }
     class Metadata {
         constructor();

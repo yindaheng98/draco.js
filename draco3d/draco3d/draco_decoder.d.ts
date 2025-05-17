@@ -210,6 +210,7 @@ declare module Module {
         GetAttributeUInt32ForAllPoints(pc: PointCloud, pa: PointAttribute, out_values: DracoUInt32Array): boolean;
         GetAttributeDataArrayForAllPoints(pc: PointCloud, pa: PointAttribute, data_type: draco_DataType, out_size: number, out_values: unknown): boolean;
         SkipAttributeTransform(att_type: draco_GeometryAttribute_Type): void;
+        GetEncodedGeometryType(data: ReadonlyArray<number>): draco_EncodedGeometryType;
         GetEncodedGeometryType_Deprecated(in_buffer: DecoderBuffer): draco_EncodedGeometryType;
         DecodeBufferToPointCloud(in_buffer: DecoderBuffer, out_point_cloud: PointCloud): Status;
         DecodeBufferToMesh(in_buffer: DecoderBuffer, out_mesh: Mesh): Status;
