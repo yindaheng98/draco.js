@@ -64,7 +64,6 @@ export type DracoDecoderModule = (props: DracoDecoderModuleProps) => Promise<Dec
 
 export interface DecoderModule extends BaseModule {
     Decoder: new() => Decoder;
-    DecoderBuffer: new() => DecoderBuffer;
     PointCloud: new() => PointCloud;
     MetadataQuerier: new() => MetadataQuerier;
 
@@ -144,10 +143,7 @@ export interface Decoder {
         byteLength: number,
         ptr: number,
     ) => void;
-}
-
-export interface DecoderBuffer {
-    Init(array: Int8Array, byteLength: number): void;
+    GetEncodedGeometryType(buffer: Int8Array): GeometryType;
 }
 
 export interface DracoArray {
